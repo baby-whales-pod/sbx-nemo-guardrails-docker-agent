@@ -1,0 +1,67 @@
+# NeMo Guardrails config for the "sbx + nemo-guardrails + docker-agent" demo.
+#
+# Served with:
+#   nemoguardrails server --config=/guardrails-config --default-config-id=demo
+# (this directory is mounted at /guardrails-config/demo inside the container, see ../docker-compose.yml)
+#
+# Every model below is 100% local, served by llmman on the host
+# (http://host.docker.internal:17434/v1, OpenAI-compatible). No cloud calls.
+
+models:
+  # Generates the actual response. A capable, general-purpose instruct model.
+  - type: main
+    engine: openai
+    model: huggingface.co/unsloth/qwen3.5-4b-gguf:Q4_K_M
+    parameters:
+      base_url: http://host.docker.internal:17434/v1
+      # Qwen 3.5 "thinks" before answering, and that reasoning streams as ~1000+ chunks with
+      # no text. NeMo counts them in chunk_size, and an output-rail window made only of those
+      # empty chunks is blocked ("Blocked by self check output rails") without ever calling
+      # the guard model. Switching the reasoning off removes them; NeMo forwards any extra
+      # parameter as-is in the request body.
+      chat_template_kwargs:
+        enable_thinking: false
+    api_key_env_var: LLMMAN_API_KEY
+
+  # Checks the user's message before it reaches the main model.
+  # ShieldGemma is a small model purpose-built for safety classification:
+  # fast, and it answers Yes/No directly with no chain-of-thought.
+  - type: self_check_input
+    engine: openai
+    model: huggingface.co/litellms/shieldgemma-2b-gguf:Q4_K_M
+    parameters:
+      base_url: http://host.docker.internal:17434/v1
+    api_key_env_var: LLMMAN_API_KEY
+
+  # Checks the main model's response before it is returned to the agent.
+  - type: self_check_output
+    engine: openai
+    model: huggingface.co/litellms/shieldgemma-2b-gguf:Q4_K_M
+    parameters:
+      base_url: http://host.docker.internal:17434/v1
+    api_key_env_var: LLMMAN_API_KEY
+
+# The conversation (docker-agent's own system instructions + messages) goes straight to the main model unmodified; 
+# NeMo only wraps it with the two rails below. 
+# Without this, NeMo would rewrite the prompt with its own internal dialog-management templating, 
+# which would fight docker-agent's own system prompt.
+passthrough: true
+
+rails:
+  input:
+    flows:
+      - self check input
+  output:
+    flows:
+      - self check output
+    # docker-agent always streams. NeMo refuses stream_async() when output rails are configured unless streaming is enabled for them: 
+    # the reply is then checked chunk by chunk (chunk_size tokens, with context_size tokens of the previous chunk for continuity).
+    streaming:
+      enabled: true
+      # Smaller = the reply reaches the agent sooner but in more pieces; larger = fewer, later
+      # pieces (with 1000, a short reply only arrives at the end). 200 got long replies blocked.
+      chunk_size: 400
+      context_size: 50
+      # false = a chunk is only sent to the agent once the output rail has checked it. 
+      # true would stream first and check after, which defeats the point of the output rail.
+      stream_first: false

@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="DejaVu Sans, Verdana, sans-serif">
+  <defs>
+    <linearGradient id="gBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EEF2FA"/>
+    </linearGradient>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="gBlue2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <linearGradient id="gGrey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#37474F"/>
+    </marker>
+    <marker id="arrowGrey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#78909C"/>
+    </marker>
+  </defs>
+
+    <rect x="0" y="0" width="1200" height="640" fill="url(#gBg)"/>
+
+  <text x="600" y="36" text-anchor="middle" font-size="24" font-weight="700" fill="#1A237E">NeMo Guardrails architecture</text>
+  <text x="600" y="63" text-anchor="middle" font-size="13" font-style="italic" fill="#546E7A">an OpenAI-compatible server that runs input and output rails around every call to the model</text>
+
+  <!-- Container -->
+  <rect x="235" y="100" width="625" height="500" rx="20" fill="#FAFBFF" stroke="#90A4AE" stroke-width="2" stroke-dasharray="8,5"/>
+  <text x="255" y="128" font-size="13" font-weight="700" font-style="italic" fill="#607D8B">NeMo Guardrails server (nemo-guardrails sandbox)</text>
+
+  <!-- Client -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="150" width="150" height="95" rx="16" fill="url(#gBlue)" stroke="#1565C0" stroke-width="2"/>
+  </g>
+  <text x="115.0" y="184" text-anchor="middle" font-size="22">🤖</text>
+  <text x="115.0" y="208" text-anchor="middle" font-size="14" font-weight="700" fill="#0D47A1">docker-agent</text>
+  <text x="115.0" y="227" text-anchor="middle" font-size="11.5" fill="#0D47A1">any OpenAI client</text>
+  <!-- API -->
+  <g filter="url(#shadow)">
+    <rect x="438" y="150" width="220" height="95" rx="16" fill="url(#gBlue2)" stroke="#0277BD" stroke-width="2"/>
+  </g>
+  <text x="548.0" y="176" text-anchor="middle" font-size="22">🌐</text>
+  <text x="548.0" y="200" text-anchor="middle" font-size="14" font-weight="700" fill="#01579B">HTTP API server</text>
+  <text x="548.0" y="218" text-anchor="middle" font-size="11.5" fill="#01579B">POST /v1/chat/completions</text>
+  <text x="548.0" y="236" text-anchor="middle" font-size="11.5" fill="#01579B">OpenAI-compatible</text>
+  <!-- Engine -->
+  <g filter="url(#shadow)">
+    <rect x="260" y="290" width="575" height="100" rx="16" fill="url(#gBlue2)" stroke="#0277BD" stroke-width="2"/>
+  </g>
+  <text x="547.5" y="318" text-anchor="middle" font-size="22">⚙️</text>
+  <text x="547.5" y="342" text-anchor="middle" font-size="14" font-weight="700" fill="#01579B">LLMRails engine</text>
+  <text x="547.5" y="361" text-anchor="middle" font-size="11.5" fill="#01579B">orchestrates every request:</text>
+  <text x="547.5" y="378" text-anchor="middle" font-size="11.5" fill="#01579B">input rails → main model → output rails</text>
+  <!-- Config -->
+  <g filter="url(#shadow)">
+    <rect x="260" y="450" width="250" height="120" rx="16" fill="url(#gGrey)" stroke="#455A64" stroke-width="2"/>
+  </g>
+  <text x="385.0" y="480" text-anchor="middle" font-size="22">📋</text>
+  <text x="385.0" y="504" text-anchor="middle" font-size="14" font-weight="700" fill="#263238">Configuration</text>
+  <text x="385.0" y="522" text-anchor="middle" font-size="11.5" fill="#263238">config.yml: models, rails</text>
+  <text x="385.0" y="540" text-anchor="middle" font-size="11.5" fill="#263238">prompts.yml: guard policy</text>
+  <text x="385.0" y="556" text-anchor="middle" font-size="11.5" fill="#263238">(+ Colang flows, optional)</text>
+  <!-- Rails -->
+  <g filter="url(#shadow)">
+    <rect x="585" y="450" width="250" height="120" rx="16" fill="url(#gBlue2)" stroke="#0277BD" stroke-width="2"/>
+  </g>
+  <text x="710.0" y="480" text-anchor="middle" font-size="22">🔍</text>
+  <text x="710.0" y="504" text-anchor="middle" font-size="14" font-weight="700" fill="#01579B">Rails</text>
+  <text x="710.0" y="522" text-anchor="middle" font-size="11.5" fill="#01579B">self_check_input</text>
+  <text x="710.0" y="540" text-anchor="middle" font-size="11.5" fill="#01579B">self_check_output</text>
+  <text x="710.0" y="556" text-anchor="middle" font-size="11.5" fill="#01579B">output checked chunk by chunk</text>
+  <!-- llmman -->
+  <g filter="url(#shadow)">
+    <rect x="960" y="290" width="210" height="230" rx="16" fill="url(#gYellow)" stroke="#F9A825" stroke-width="2"/>
+  </g>
+  <text x="1065.0" y="366" text-anchor="middle" font-size="22">📦</text>
+  <text x="1065.0" y="390" text-anchor="middle" font-size="14" font-weight="700" fill="#F57F17">llmman</text>
+  <text x="1065.0" y="409" text-anchor="middle" font-size="11.5" fill="#F57F17">main model: Qwen 3.5 4B</text>
+  <text x="1065.0" y="426" text-anchor="middle" font-size="11.5" fill="#F57F17">guard model: ShieldGemma 2B</text>
+  <text x="1065.0" y="443" text-anchor="middle" font-size="11.5" fill="#F57F17">on the host,</text>
+  <text x="1065.0" y="460" text-anchor="middle" font-size="11.5" fill="#F57F17">OpenAI-compatible</text>
+
+  <!-- client -> API -->
+  <line x1="192" y1="197" x2="435" y2="197" stroke="#37474F" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="313" y="187" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">OpenAI API</text>
+  <text x="313" y="215" text-anchor="middle" font-size="10.5" fill="#607D8B">streaming</text>
+
+  <!-- API <-> engine -->
+  <line x1="548" y1="247" x2="548" y2="288" stroke="#37474F" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="493" y="258" width="110" height="18" fill="#FAFBFF"/>
+  <text x="548" y="271" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">request / reply</text>
+
+  <!-- config -> engine -->
+  <line x1="385" y1="448" x2="385" y2="392" stroke="#37474F" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="323" y="411" width="124" height="18" fill="#FAFBFF"/>
+  <text x="385" y="424" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">loaded at startup</text>
+
+  <!-- engine <-> rails -->
+  <line x1="710" y1="392" x2="710" y2="448" stroke="#37474F" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="658" y="411" width="104" height="18" fill="#FAFBFF"/>
+  <text x="710" y="424" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">runs the rails</text>
+
+  <!-- engine -> llmman -->
+  <line x1="837" y1="340" x2="957" y2="340" stroke="#37474F" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="872" y="331" width="76" height="18" fill="#FAFBFF"/>
+  <text x="910" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">main call</text>
+
+  <!-- rails -> llmman -->
+  <line x1="837" y1="510" x2="957" y2="510" stroke="#37474F" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="872" y="501" width="76" height="18" fill="#FAFBFF"/>
+  <text x="910" y="514" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">guard calls</text>
+</svg>

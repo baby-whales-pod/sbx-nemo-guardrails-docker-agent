@@ -1,0 +1,35 @@
+# docker-agent config for the "sbx + nemo-guardrails" demo.
+#
+# Every message this agent sends goes through the nemo-guardrails sandbox first 
+# (see ../nemo-guardrails-config/config.yml for the rails, 
+# and ../README.md for how to wire the two sandboxes together). 
+# docker-agent never talks to llmman directly in this setup.
+#
+# Run with:
+#   docker-agent run agent.yaml
+
+providers:
+  nemo_guardrails:
+    api_type: openai_chatcompletions
+    # 8000 is the port nemo-guardrails listens on inside its sandbox.
+    # Update this if you published it under a different host port with
+    # `sbx ports nemo-guardrails --publish <port>:8000`.
+    base_url: http://host.docker.internal:8000/v1
+    token_key: NEMO_GUARDRAILS_API_KEY # dummy value, nemo-guardrails doesn't check it
+
+models:
+  guarded_model:
+    provider: nemo_guardrails
+    # Must match EXACTLY the "main" model's `model:` id in
+    # ../nemo-guardrails-config/config.yml — the nemo-guardrails server
+    # injects this value into its own main-model config on every request,
+    # so a mismatch here would send the wrong model id to llmman.
+    model: huggingface.co/unsloth/qwen3.5-4b-gguf:Q4_K_M
+
+agents:
+  root:
+    model: guarded_model
+    description: A helpful local assistant, with every message screened by NeMo Guardrails
+    instruction: |
+      You are a helpful AI assistant running entirely on local models.
+      Be concise, accurate, and helpful.

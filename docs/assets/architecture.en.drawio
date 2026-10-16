@@ -1,0 +1,63 @@
+<mxfile host="app.diagrams.net" agent="drawio-fancy-diagram-skill" version="24.7.17" type="device">
+  <diagram name="Architecture" id="nemo-guardrails-architecture-en">
+    <mxGraphModel dx="1400" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Background -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFBFF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="SBX + NeMo Guardrails — a safety gate in front of the local model" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="200" y="16" width="800" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="docker-agent → nemo-guardrails → llmman: every message passes through the gate before the model" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#546E7A;" vertex="1" parent="1">
+          <mxGeometry x="150" y="50" width="900" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Sandbox docker-agent -->
+        <mxCell id="boxA" value="🤖 Sandbox: docker-agent&#10;user CLI/TUI agent&#10;openai-compatible provider" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=14;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="230" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Sandbox nemo-guardrails -->
+        <mxCell id="boxB" value="🛡 Sandbox: nemo-guardrails&#10;docker compose → nemoguardrails server&#10;receives every message before the model" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;gradientColor=#E1BEE7;shadow=1;fontSize=14;fontStyle=1;fontColor=#4A148C;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="520" y="190" width="260" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="badge" value="🔒 safety gate" style="rounded=1;arcSize=50;whiteSpace=wrap;html=1;fillColor=#6A1B9A;strokeColor=none;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="635" y="178" width="130" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Host container -->
+        <mxCell id="hostContainer" value="🖥 Host machine (macOS/Linux)" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#90A4AE;dashed=1;verticalAlign=top;align=center;fontSize=13;fontStyle=2;fontColor=#607D8B;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="150" width="210" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- llmman -->
+        <mxCell id="boxLlmman" value="📦 llmman&#10;main + guard models&#10;OpenAI-compatible API" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;gradientColor=#FFF9C4;shadow=1;fontSize=14;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="975" y="225" width="180" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Edge A -> B -->
+        <mxCell id="e-A-B" value="chat/completions&#10;host.docker.internal:8000" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;align=center;verticalAlign=middle;" edge="1" parent="1" source="boxA" target="boxB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Edge B -> llmman -->
+        <mxCell id="e-B-llmman" value="engine: openai&#10;host.docker.internal:17434" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;align=center;verticalAlign=middle;" edge="1" parent="1" source="boxB" target="boxLlmman">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Caption -->
+        <mxCell id="caption" value="⚠ No direct network link between two sbx sandboxes.&#10;Every arrow above actually goes through the host machine (sbx ports publish + host.docker.internal)." style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#607D8B;" vertex="1" parent="1">
+          <mxGeometry x="100" y="410" width="1000" height="50" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

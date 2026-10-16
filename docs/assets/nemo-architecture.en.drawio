@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" agent="drawio-fancy-diagram-skill" version="24.7.17" type="device">
+  <diagram name="NeMo Guardrails Architecture" id="nemo-guardrails-architecture-en">
+    <mxGraphModel dx="1400" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="640" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFBFF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="NeMo Guardrails architecture" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="200" y="16" width="800" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="an OpenAI-compatible server that runs input and output rails around every call to the model" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#546E7A;" vertex="1" parent="1">
+          <mxGeometry x="100" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="container" value="NeMo Guardrails server (nemo-guardrails sandbox)" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 5;fillColor=#FAFBFF;strokeColor=#90A4AE;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=20;spacingTop=8;fontSize=13;fontStyle=3;fontColor=#607D8B;" vertex="1" parent="1">
+          <mxGeometry x="235" y="100" width="625" height="500" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client" value="🤖&#10;docker-agent&#10;any OpenAI client" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;gradientColor=#BBDEFB;shadow=1;fontSize=14;fontStyle=1;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="150" width="150" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="🌐&#10;HTTP API server&#10;POST /v1/chat/completions&#10;OpenAI-compatible" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=13;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="438" y="150" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="engine" value="⚙️&#10;LLMRails engine&#10;orchestrates every request:&#10;input rails → main model → output rails" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=13;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="260" y="290" width="575" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="config" value="📋&#10;Configuration&#10;config.yml: models, rails&#10;prompts.yml: guard policy&#10;(+ Colang flows, optional)" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;gradientColor=#CFD8DC;shadow=1;fontSize=13;fontStyle=1;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="260" y="450" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rails" value="🔍&#10;Rails&#10;self_check_input&#10;self_check_output&#10;output checked chunk by chunk" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=13;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="585" y="450" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="llmman" value="📦&#10;llmman&#10;main model: Qwen 3.5 4B&#10;guard model: ShieldGemma 2B&#10;on the host,&#10;OpenAI-compatible" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;gradientColor=#FFF9C4;shadow=1;fontSize=13;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="960" y="290" width="210" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="OpenAI API (streaming)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;startArrow=block;startFill=1;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="192" y="197" as="sourcePoint" />
+            <mxPoint x="435" y="197" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="request / reply" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;startArrow=block;startFill=1;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="548" y="247" as="sourcePoint" />
+            <mxPoint x="548" y="288" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="loaded at startup" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="385" y="448" as="sourcePoint" />
+            <mxPoint x="385" y="392" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="runs the rails" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;startArrow=block;startFill=1;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="392" as="sourcePoint" />
+            <mxPoint x="710" y="448" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="main call" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;startArrow=block;startFill=1;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="837" y="340" as="sourcePoint" />
+            <mxPoint x="957" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="guard calls" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2.5;startArrow=block;startFill=1;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="837" y="510" as="sourcePoint" />
+            <mxPoint x="957" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

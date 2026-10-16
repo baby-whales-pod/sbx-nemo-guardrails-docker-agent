@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" font-family="DejaVu Sans, Verdana, sans-serif">
+  <defs>
+    <linearGradient id="gBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EEF2FA"/>
+    </linearGradient>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="gBlue2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <linearGradient id="gGrey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#37474F"/>
+    </marker>
+    <marker id="arrowGrey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#78909C"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="580" fill="url(#gBg)"/>
+
+  <text x="600" y="36" text-anchor="middle" font-size="24" font-weight="700" fill="#1A237E">Inside the nemo-guardrails sandbox: a message's journey</text>
+  <text x="600" y="63" text-anchor="middle" font-size="13" font-style="italic" fill="#546E7A">the self_check_input / self_check_output rails wrap the call to the main model — either one can block the message</text>
+
+  <!-- Start -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="235" width="130" height="100" rx="16" fill="url(#gBlue)" stroke="#1565C0" stroke-width="2"/>
+  </g>
+  <text x="105" y="272" text-anchor="middle" font-size="22">👤</text>
+  <text x="105" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">User</text>
+  <text x="105" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">message</text>
+
+  <!-- Rail in -->
+  <g filter="url(#shadow)">
+    <rect x="258" y="220" width="170" height="130" rx="16" fill="url(#gBlue2)" stroke="#0277BD" stroke-width="2"/>
+  </g>
+  <text x="343" y="257" text-anchor="middle" font-size="22">🔍</text>
+  <text x="343" y="280" text-anchor="middle" font-size="13" font-weight="700" fill="#01579B">Rail: self_check_input</text>
+  <text x="343" y="300" text-anchor="middle" font-size="11.5" fill="#01579B">ShieldGemma (guard)</text>
+
+  <!-- Main -->
+  <g filter="url(#shadow)">
+    <rect x="516" y="220" width="170" height="130" rx="16" fill="url(#gYellow)" stroke="#F9A825" stroke-width="2"/>
+  </g>
+  <text x="601" y="257" text-anchor="middle" font-size="22">📦</text>
+  <text x="601" y="280" text-anchor="middle" font-size="13" font-weight="700" fill="#F57F17">llmman</text>
+  <text x="601" y="298" text-anchor="middle" font-size="11.5" fill="#F57F17">main model</text>
+  <text x="601" y="314" text-anchor="middle" font-size="11.5" fill="#F57F17">generates the reply</text>
+
+  <!-- Rail out -->
+  <g filter="url(#shadow)">
+    <rect x="774" y="220" width="170" height="130" rx="16" fill="url(#gBlue2)" stroke="#0277BD" stroke-width="2"/>
+  </g>
+  <text x="859" y="257" text-anchor="middle" font-size="22">🔍</text>
+  <text x="859" y="280" text-anchor="middle" font-size="13" font-weight="700" fill="#01579B">Rail: self_check_output</text>
+  <text x="859" y="300" text-anchor="middle" font-size="11.5" fill="#01579B">ShieldGemma (guard)</text>
+  <text x="859" y="318" text-anchor="middle" font-size="11.5" fill="#01579B">checked per 400 tokens</text>
+
+  <!-- End -->
+  <g filter="url(#shadow)">
+    <rect x="1030" y="235" width="130" height="100" rx="16" fill="url(#gBlue)" stroke="#1565C0" stroke-width="2"/>
+  </g>
+  <text x="1095" y="272" text-anchor="middle" font-size="22">✅</text>
+  <text x="1095" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">Reply</text>
+  <text x="1095" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="#0D47A1">to the agent</text>
+
+  <!-- Reject -->
+  <g filter="url(#shadow)">
+    <rect x="506" y="440" width="190" height="100" rx="16" fill="url(#gGrey)" stroke="#455A64" stroke-width="2"/>
+  </g>
+  <text x="601" y="476" text-anchor="middle" font-size="20">🚫</text>
+  <text x="601" y="500" text-anchor="middle" font-size="13" font-weight="700" fill="#263238">Blocked / refused</text>
+  <text x="601" y="518" text-anchor="middle" font-size="11" fill="#263238">refusal sent to the agent</text>
+
+  <!-- e1: start -> rail in -->
+  <line x1="172" y1="285" x2="255" y2="285" stroke="#37474F" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- e2: rail in -> main -->
+  <line x1="430" y1="285" x2="513" y2="285" stroke="#37474F" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="446" y="269" width="51" height="18" fill="#FAFBFF"/>
+  <text x="471" y="283" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">OK ✅</text>
+
+  <!-- e3: main -> rail out -->
+  <line x1="688" y1="285" x2="771" y2="285" stroke="#37474F" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- e4: rail out -> end -->
+  <line x1="946" y1="285" x2="1027" y2="285" stroke="#37474F" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="961" y="269" width="51" height="18" fill="#FAFBFF"/>
+  <text x="986" y="283" text-anchor="middle" font-size="11" font-weight="700" fill="#263238">OK ✅</text>
+
+  <!-- e5: rail in -> reject (dashed) -->
+  <path d="M 343 352 L 343 400 L 553.5 400 L 553.5 437" fill="none" stroke="#78909C" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowGrey)"/>
+  <rect x="412" y="391" width="84" height="18" fill="#FAFBFF"/>
+  <text x="454" y="405" text-anchor="middle" font-size="11" font-style="italic" fill="#607D8B">❌ blocked</text>
+
+  <!-- e6: rail out -> reject (dashed) -->
+  <path d="M 859 352 L 859 400 L 648.5 400 L 648.5 437" fill="none" stroke="#78909C" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowGrey)"/>
+  <rect x="706" y="391" width="84" height="18" fill="#FAFBFF"/>
+  <text x="748" y="405" text-anchor="middle" font-size="11" font-style="italic" fill="#607D8B">❌ blocked</text>
+</svg>

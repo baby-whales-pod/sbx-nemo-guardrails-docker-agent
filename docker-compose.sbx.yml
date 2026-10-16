@@ -1,0 +1,16 @@
+# Override for Option B (the nemo-guardrails sbx sandbox), used on top of
+# docker-compose.yml:
+#   docker compose -f docker-compose.yml -f docker-compose.sbx.yml up -d
+#
+# Inside the sandbox, `host.docker.internal` only resolves to the real host
+# for processes running in the sandbox's own network namespace. With the
+# default bridge network, the `host-gateway` mapping in docker-compose.yml
+# points at the sandbox's Docker bridge instead, so NeMo cannot reach llmman
+# (host:17434): "All connection attempts failed". Host networking fixes that;
+# NeMo then listens on the sandbox's port 8000 directly, which is what
+# `sbx ports nemo-guardrails --publish 8000:8000` publishes.
+services:
+  nemo-guardrails:
+    network_mode: "host"
+    ports: !reset []
+    extra_hosts: !reset []

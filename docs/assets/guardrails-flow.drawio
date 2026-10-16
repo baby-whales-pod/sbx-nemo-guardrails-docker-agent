@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="drawio-fancy-diagram-skill" version="24.7.17" type="device">
+  <diagram name="Guardrails Flow" id="nemo-guardrails-flow">
+    <mxGraphModel dx="1400" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="580" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Background -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFBFF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="580" as="geometry" />
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="Dans la sandbox nemo-guardrails : le parcours d'un message" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="200" y="16" width="800" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="les rails self_check_input / self_check_output entourent l'appel au modèle principal — chacun peut bloquer le message" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#546E7A;" vertex="1" parent="1">
+          <mxGeometry x="100" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Start: user message -->
+        <mxCell id="boxStart" value="👤 Message&#10;utilisateur" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;gradientColor=#BBDEFB;shadow=1;fontSize=14;fontStyle=1;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="235" width="130" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Rail: self_check_input -->
+        <mxCell id="boxRailIn" value="🔍 Rail: self_check_input&#10;ShieldGemma (guard)" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=13;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="258" y="220" width="170" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Main model -->
+        <mxCell id="boxMain" value="📦 llmman&#10;modèle principal&#10;génère la réponse" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;gradientColor=#FFF9C4;shadow=1;fontSize=13;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="516" y="220" width="170" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Rail: self_check_output -->
+        <mxCell id="boxRailOut" value="🔍 Rail: self_check_output&#10;ShieldGemma (guard)&#10;vérifié par 400 tokens" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;gradientColor=#B3E5FC;shadow=1;fontSize=13;fontStyle=1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="774" y="220" width="170" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- End: response -->
+        <mxCell id="boxEnd" value="✅ Réponse&#10;à l'agent" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;gradientColor=#BBDEFB;shadow=1;fontSize=14;fontStyle=1;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="235" width="130" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Reject -->
+        <mxCell id="boxReject" value="🚫 Bloqué / refusé&#10;refus renvoyé à l'agent" style="rounded=1;arcSize=14;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;gradientColor=#CFD8DC;shadow=1;fontSize=13;fontStyle=1;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="506" y="440" width="190" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Edges main flow -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="boxStart" target="boxRailIn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="OK ✅" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1" source="boxRailIn" target="boxMain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="boxMain" target="boxRailOut">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="OK ✅" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#37474F;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=1;fontColor=#263238;labelBackgroundColor=#FAFBFF;" edge="1" parent="1" source="boxRailOut" target="boxEnd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Reject edges -->
+        <mxCell id="e5" value="❌ bloqué" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#78909C;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=2;fontColor=#607D8B;labelBackgroundColor=#FAFBFF;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" edge="1" parent="1" source="boxRailIn" target="boxReject">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="❌ bloqué" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#78909C;strokeWidth=2;endArrow=block;endFill=1;fontSize=11;fontStyle=2;fontColor=#607D8B;labelBackgroundColor=#FAFBFF;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="boxRailOut" target="boxReject">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

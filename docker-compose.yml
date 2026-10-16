@@ -1,0 +1,21 @@
+services:
+  nemo-guardrails:
+    build:
+      context: https://github.com/NVIDIA-NeMo/Guardrails.git
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nemo-guardrails-config:/guardrails-config/demo:ro
+    environment:
+      # Dummy value: llmman doesn't check it, but the OpenAI client used by
+      # NeMo Guardrails refuses to start a model with no api key at all.
+      - LLMMAN_API_KEY=llmman-local-no-key-required
+    command: ["server", "--config=/guardrails-config", "--default-config-id=demo", "--verbose"]
+    # The sbx sandbox can be stopped and restarted (idle, or by sbx exec/run
+    # starting it again): without this the container stays down afterwards
+    # and the published port resets connections.
+    restart: unless-stopped
+    extra_hosts:
+      # Needed on Linux docker engines (including the one inside an sbx
+      # sandbox); Docker Desktop already provides this mapping.
+      - "host.docker.internal:host-gateway"
